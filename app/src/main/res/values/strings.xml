@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Alien VS Predator</string>
+    <string name="fhdfhd">fhdfhd</string>
+    <string name="main_BTN_attack">ATTACK</string>
+    <string name="main_BTN_lightAttack">Light\nAttack</string>
+    <string name="main_BTN_strongAttack">Strong\nAttack</string>
+    <string name="main_BTN_brutalAttack">Brutal\nAttack</string>
+
+</resources>
