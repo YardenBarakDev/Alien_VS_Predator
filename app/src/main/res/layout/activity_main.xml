@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2">
+    tools:context=".MainActivity">
 
 
     <LinearLayout
@@ -22,24 +22,24 @@
             >
 
             <ProgressBar
-                android:id="@+id/main_PB_alienHP"
+                android:id="@+id/main_PB_p1HP"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="5dp"
                 android:max="250"
-                android:progressDrawable="@drawable/customprogressbar"
+                android:progressDrawable="@drawable/main_progressbar_high_hp"
 
                 />
 
             <ImageView
-                android:id="@+id/main_IMAGE_alien"
+                android:id="@+id/main_IMAGE_p1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:layout_marginTop="10dp"
-                android:contentDescription="@string/fhdfhd" />
+                android:contentDescription="@string/p1_image" />
 
         </LinearLayout>
 
@@ -49,7 +49,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/main_BTN_alien_attack_1"
+                android:id="@+id/main_BTN_p1_attack1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -60,7 +60,7 @@
                 />
 
             <Button
-                android:id="@+id/main_BTN_alien_attack_2"
+                android:id="@+id/main_BTN_p1_attack2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -72,7 +72,7 @@
                 />
 
             <Button
-                android:id="@+id/main_BTN_alien_attack_3"
+                android:id="@+id/main_BTN_p1_attack3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -102,7 +102,7 @@
 
 
             <Button
-                android:id="@+id/main_BTN_predator_attack_1"
+                android:id="@+id/main_BTN_p2_attack1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -114,7 +114,7 @@
                 />
 
             <Button
-                android:id="@+id/main_BTN_predator_attack_2"
+                android:id="@+id/main_BTN_p2_attack2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -127,7 +127,7 @@
                 />
 
             <Button
-                android:id="@+id/main_BTN_predator_attack_3"
+                android:id="@+id/main_BTN_p2_attack3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -147,11 +147,11 @@
             android:layout_weight="5">
 
             <ProgressBar
-                android:id="@+id/main_PB_predatorHP"
+                android:id="@+id/main_PB_p2HP"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progressDrawable="@drawable/customprogressbar"
+                android:progressDrawable="@drawable/main_progressbar_high_hp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="5dp"
                 android:max="250"
@@ -160,12 +160,12 @@
                 />
 
             <ImageView
-                android:id="@+id/main_IMAGE_predator"
+                android:id="@+id/main_IMAGE_p2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:layout_marginTop="10dp"
-                android:contentDescription="@string/fhdfhd" />
+                android:contentDescription="@string/p2_image" />
 
         </LinearLayout>
 

@@ -5,7 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="main_BTN_attackText">#00BCD4</color>
     <color name="main_BTN_background">#0055FF</color>
-    <color name="main_BTN_dis">#9E434343</color>
+    <color name="main_BTN_disable">#9E434343</color>
     <color name="main_background">#FFFFFF</color>
     <color name="main_SB_hp">#65D800</color>
     <color name="main_SB_hpLost">#FF0000</color>
