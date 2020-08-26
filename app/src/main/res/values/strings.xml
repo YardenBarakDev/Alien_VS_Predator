@@ -6,5 +6,11 @@
     <string name="main_BTN_lightAttack">Light\nAttack</string>
     <string name="main_BTN_strongAttack">Strong\nAttack</string>
     <string name="main_BTN_brutalAttack">Brutal\nAttack</string>
+    <string name="main_BTN_lightAttack_p1">main_BTN_lightAttack_p1</string>
+    <string name="main_BTN_StrongAttack_p1">main_BTN_StrongAttack_p1</string>
+    <string name="main_BTN_BrutalAttack_p1">main_BTN_BrutalAttack_p1</string>
+    <string name="main_BTN_lightAttack_p2">main_BTN_lightAttack_p2</string>
+    <string name="main_BTN_StrongAttack_p2">main_BTN_StrongAttack_p2</string>
+    <string name="main_BTN_BrutalAttack_p2">main_BTN_BrutalAttack_p2</string>
 
 </resources>

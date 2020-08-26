@@ -10,7 +10,6 @@ attack1- light attack 10hp
 attack2- strong attack 20hp
 attack3- brutal attack 30hp
 hp bar - 250
-
  */
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -38,15 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageView main_IMAGE_p2;
     private ProgressBar main_PB_p2HP;
 
-    //Game variables
-    private final int LIGHT_ATTACK = 10;
-    private final int STRONG_ATTACK = 20;
-    private final int BRUTAL_ATTACK = 30;
-    private final int MAX_HP = 250;
-    private final int CRITICAL_HP = 200;
-    private final String P1_WIN = "Alien Win";
-    private final String P2_WIN = "Predator Win";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,69 +45,64 @@ public class MainActivity extends AppCompatActivity {
         loadImages();
         disableP2Buttons();
 
-        main_BTN_p1_attack1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableP2Buttons();
-                disableP1Buttons();
-                hitP2(LIGHT_ATTACK);
-            }
-        });
+        //P1 attack buttons
+        main_BTN_p1_attack1.setOnClickListener(attackButtonsListener);
+        main_BTN_p1_attack2.setOnClickListener(attackButtonsListener);
+        main_BTN_p1_attack3.setOnClickListener(attackButtonsListener);
 
-        main_BTN_p1_attack2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableP2Buttons();
-                disableP1Buttons();
-                hitP2(STRONG_ATTACK);
-            }
-        });
-
-        main_BTN_p1_attack3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableP2Buttons();
-                disableP1Buttons();
-                hitP2(BRUTAL_ATTACK);
-            }
-        });
-
-        main_BTN_p2_attack1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableP1Buttons();
-                disableP2Buttons();
-                hitP1(LIGHT_ATTACK);
-            }
-        });
-
-        main_BTN_p2_attack2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableP1Buttons();
-                disableP2Buttons();
-                hitP1(STRONG_ATTACK);
-            }
-        });
-
-        main_BTN_p2_attack3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                enableP1Buttons();
-                disableP2Buttons();
-                hitP1(BRUTAL_ATTACK);
-            }
-        });
+        //P2 attack buttons
+        main_BTN_p2_attack1.setOnClickListener(attackButtonsListener);
+        main_BTN_p2_attack2.setOnClickListener(attackButtonsListener);
+        main_BTN_p2_attack3.setOnClickListener(attackButtonsListener);
     }
 
-    private void p1Win() {
-        disableAllButtons();
-        Toast.makeText(this, P1_WIN, Toast.LENGTH_LONG).show();
-    }
+    private View.OnClickListener attackButtonsListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            attackButtonClicked(view);
+        }
 
-    private void p2Win() {
+        /*
+        monitor which button was clicked and perform the necessary code
+        by checking the buttons tag
+         */
+        private void attackButtonClicked(View view) {
+            if (((String) view.getTag()).contains("p1")){
+                enableP2Buttons();
+                disableP1Buttons();
+                switch (((String) view.getTag())) {
+                    case "main_BTN_lightAttack_p1":
+                        hitP2(GameVariables.LIGHT_ATTACK);
+                        break;
+                    case "main_BTN_StrongAttack_p1":
+                        hitP2(GameVariables.STRONG_ATTACK);
+                        break;
+                    case "main_BTN_BrutalAttack_p1":
+                        hitP2(GameVariables.BRUTAL_ATTACK);
+                        break;
+                }
+            }
+            else{
+                enableP1Buttons();
+                disableP2Buttons();
+                switch (((String) view.getTag())) {
+                    case "main_BTN_lightAttack_p2":
+                        hitP1(GameVariables.LIGHT_ATTACK);
+                        break;
+                    case "main_BTN_StrongAttack_p2":
+                        hitP1(GameVariables.STRONG_ATTACK);
+                        break;
+                    case "main_BTN_BrutalAttack_p2":
+                        hitP1(GameVariables.BRUTAL_ATTACK);
+                        break;
+                }
+            }
+        }
+    };
+
+    private void announceWinner(String winner) {
         disableAllButtons();
-        Toast.makeText(this, P2_WIN, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, winner, Toast.LENGTH_LONG).show();
     }
 
     private void disableAllButtons() {
@@ -133,19 +118,19 @@ public class MainActivity extends AppCompatActivity {
      */
     private void hitP1(int attack) {
         main_PB_p1HP.setProgress(attack + main_PB_p1HP.getProgress());
-        if (main_PB_p1HP.getProgress() > CRITICAL_HP)
+        if (main_PB_p1HP.getProgress() > GameVariables.CRITICAL_HP)
             main_PB_p1HP.setProgressDrawable(ContextCompat.getDrawable(this, R.drawable.main_progressbar_low_hp));
-        if (main_PB_p1HP.getProgress() >= MAX_HP)
-            p2Win();
+        if (main_PB_p1HP.getProgress() >= GameVariables.MAX_HP)
+            announceWinner(GameVariables.P2_WIN);
 
     }
 
     private void hitP2(int attack) {
         main_PB_p2HP.setProgress(attack + main_PB_p2HP.getProgress());
-        if (main_PB_p2HP.getProgress() > CRITICAL_HP)
+        if (main_PB_p2HP.getProgress() > GameVariables.CRITICAL_HP)
             main_PB_p2HP.setProgressDrawable(ContextCompat.getDrawable(this, R.drawable.main_progressbar_low_hp));
-        if (main_PB_p2HP.getProgress() >= MAX_HP)
-            p1Win();
+        if (main_PB_p2HP.getProgress() >= GameVariables.MAX_HP)
+            announceWinner(GameVariables.P1_WIN);
     }
 
     //load images from drawable using Glide

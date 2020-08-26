@@ -57,6 +57,7 @@
                 android:text="@string/main_BTN_lightAttack"
                 android:textColor="@color/main_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
+                android:tag="@string/main_BTN_lightAttack_p1"
                 />
 
             <Button
@@ -68,7 +69,7 @@
                 android:text="@string/main_BTN_strongAttack"
                 android:textColor="@color/main_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-
+                android:tag="@string/main_BTN_StrongAttack_p1"
                 />
 
             <Button
@@ -80,7 +81,7 @@
                 android:text="@string/main_BTN_brutalAttack"
                 android:textColor="@color/main_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-
+                android:tag="@string/main_BTN_BrutalAttack_p1"
                 />
 
 
@@ -88,7 +89,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="30">
 
@@ -110,7 +111,7 @@
                 android:text="@string/main_BTN_lightAttack"
                 android:textColor="@color/main_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-
+                android:tag="@string/main_BTN_lightAttack_p2"
                 />
 
             <Button
@@ -122,8 +123,7 @@
                 android:text="@string/main_BTN_strongAttack"
                 android:textColor="@color/main_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-
-
+                android:tag="@string/main_BTN_StrongAttack_p2"
                 />
 
             <Button
@@ -135,7 +135,7 @@
                 android:text="@string/main_BTN_brutalAttack"
                 android:textColor="@color/main_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-
+                android:tag="@string/main_BTN_BrutalAttack_p2"
                 />
 
         </LinearLayout>
