@@ -4,9 +4,9 @@
     <item android:id="@android:id/background">
         <shape>
             <gradient
-                android:startColor="@color/main_SB_hp"
-                android:centerColor="@color/main_SB_hp"
-                android:endColor="@color/main_SB_hp"
+                android:startColor="@color/game_PB_hp"
+                android:centerColor="@color/game_PB_hp"
+                android:endColor="@color/game_PB_hp"
                 />
         </shape>
     </item>
@@ -16,9 +16,9 @@
         <clip>
             <shape>
                 <gradient
-                    android:startColor="#A80303"
-                    android:centerColor="#A80303"
-                    android:endColor="#A80303"
+                    android:startColor="@color/game_PB_hpLost"
+                    android:centerColor="@color/game_PB_hpLost"
+                    android:endColor="@color/game_PB_hpLost"
                     />
             </shape>
         </clip>

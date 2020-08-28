@@ -12,7 +12,7 @@
     </style>
 
     <style name="AppTheme.RoundedCornerMaterialButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:background">@drawable/main_button_selector</item>
+        <item name="android:background">@drawable/game_button_selector</item>
     </style>
 
 </resources>

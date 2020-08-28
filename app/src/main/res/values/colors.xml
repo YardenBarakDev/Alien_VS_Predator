@@ -3,10 +3,11 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="main_BTN_attackText">#00BCD4</color>
-    <color name="main_BTN_background">#0055FF</color>
-    <color name="main_BTN_disable">#9E434343</color>
-    <color name="main_background">#FFFFFF</color>
-    <color name="main_SB_hp">#65D800</color>
-    <color name="main_SB_hpLost">#FF0000</color>
+    <color name="game_BTN_attackText">#00BCD4</color>
+    <color name="game_BTN_background">#0055FF</color>
+    <color name="game_BTN_disable">#9E434343</color>
+    <color name="game_background">#FFFFFF</color>
+    <color name="game_PB_hp">#65D800</color>
+    <color name="game_PB_hpLost">#A80303</color>
+    <color name="game_PB_hpCritical">#FF0000</color>
 </resources>

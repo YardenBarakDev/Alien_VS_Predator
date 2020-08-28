@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/game_background"
+    tools:context=".Activity_Game">
 
 
     <LinearLayout
@@ -14,27 +15,27 @@
         android:baselineAligned="false">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5"
+            android:layout_weight="10"
             android:orientation="vertical"
 
             >
 
             <ProgressBar
-                android:id="@+id/main_PB_p1HP"
+                android:id="@+id/game_PB_p1HP"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="5dp"
-                android:max="250"
-                android:progressDrawable="@drawable/main_progressbar_high_hp"
+                android:max="200"
+                android:progressDrawable="@drawable/game_progressbar_high_hp"
 
                 />
 
             <ImageView
-                android:id="@+id/main_IMAGE_p1"
+                android:id="@+id/game_IMAGE_p1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
@@ -49,39 +50,39 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/main_BTN_p1_attack1"
+                android:id="@+id/game_BTN_p1_lightAttack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="@string/main_BTN_lightAttack"
-                android:textColor="@color/main_BTN_attackText"
+                android:text="@string/game_BTN_lightAttack"
+                android:textColor="@color/game_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-                android:tag="@string/main_BTN_lightAttack_p1"
+                android:tag="@string/game_BTN_lightAttack_p1"
                 />
 
             <Button
-                android:id="@+id/main_BTN_p1_attack2"
+                android:id="@+id/game_BTN_p1_strongAttack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="@string/main_BTN_strongAttack"
-                android:textColor="@color/main_BTN_attackText"
+                android:text="@string/game_BTN_strongAttack"
+                android:textColor="@color/game_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-                android:tag="@string/main_BTN_StrongAttack_p1"
+                android:tag="@string/game_BTN_StrongAttack_p1"
                 />
 
             <Button
-                android:id="@+id/main_BTN_p1_attack3"
+                android:id="@+id/game_BTN_p1_brutalAttack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="@string/main_BTN_brutalAttack"
-                android:textColor="@color/main_BTN_attackText"
+                android:text="@string/game_BTN_brutalAttack"
+                android:textColor="@color/game_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-                android:tag="@string/main_BTN_BrutalAttack_p1"
+                android:tag="@string/game_BTN_BrutalAttack_p1"
                 />
 
 
@@ -103,64 +104,64 @@
 
 
             <Button
-                android:id="@+id/main_BTN_p2_attack1"
+                android:id="@+id/game_BTN_p2_lightAttack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="@string/main_BTN_lightAttack"
-                android:textColor="@color/main_BTN_attackText"
+                android:text="@string/game_BTN_lightAttack"
+                android:textColor="@color/game_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-                android:tag="@string/main_BTN_lightAttack_p2"
+                android:tag="@string/game_BTN_lightAttack_p2"
                 />
 
             <Button
-                android:id="@+id/main_BTN_p2_attack2"
+                android:id="@+id/game_BTN_p2_strongAttack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="@string/main_BTN_strongAttack"
-                android:textColor="@color/main_BTN_attackText"
+                android:text="@string/game_BTN_strongAttack"
+                android:textColor="@color/game_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-                android:tag="@string/main_BTN_StrongAttack_p2"
+                android:tag="@string/game_BTN_StrongAttack_p2"
                 />
 
             <Button
-                android:id="@+id/main_BTN_p2_attack3"
+                android:id="@+id/game_BTN_p2_brutalAttack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="@string/main_BTN_brutalAttack"
-                android:textColor="@color/main_BTN_attackText"
+                android:text="@string/game_BTN_brutalAttack"
+                android:textColor="@color/game_BTN_attackText"
                 style="@style/AppTheme.RoundedCornerMaterialButton"
-                android:tag="@string/main_BTN_BrutalAttack_p2"
+                android:tag="@string/game_BTN_BrutalAttack_p2"
                 />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="5">
+            android:layout_weight="10">
 
             <ProgressBar
-                android:id="@+id/main_PB_p2HP"
+                android:id="@+id/game_PB_p2HP"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progressDrawable="@drawable/main_progressbar_high_hp"
+                android:progressDrawable="@drawable/game_progressbar_high_hp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="5dp"
-                android:max="250"
+                android:max="200"
 
 
                 />
 
             <ImageView
-                android:id="@+id/main_IMAGE_p2"
+                android:id="@+id/game_IMAGE_p2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"

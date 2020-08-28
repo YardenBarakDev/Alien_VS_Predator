@@ -2,15 +2,15 @@
     <string name="app_name">Alien VS Predator</string>
     <string name="p1_image">p1 image</string>
     <string name="p2_image">p2 image</string>
-    <string name="main_BTN_attack">ATTACK</string>
-    <string name="main_BTN_lightAttack">Light\nAttack</string>
-    <string name="main_BTN_strongAttack">Strong\nAttack</string>
-    <string name="main_BTN_brutalAttack">Brutal\nAttack</string>
-    <string name="main_BTN_lightAttack_p1">main_BTN_lightAttack_p1</string>
-    <string name="main_BTN_StrongAttack_p1">main_BTN_StrongAttack_p1</string>
-    <string name="main_BTN_BrutalAttack_p1">main_BTN_BrutalAttack_p1</string>
-    <string name="main_BTN_lightAttack_p2">main_BTN_lightAttack_p2</string>
-    <string name="main_BTN_StrongAttack_p2">main_BTN_StrongAttack_p2</string>
-    <string name="main_BTN_BrutalAttack_p2">main_BTN_BrutalAttack_p2</string>
+    <string name="game_BTN_attack">ATTACK</string>
+    <string name="game_BTN_lightAttack">Light\nAttack</string>
+    <string name="game_BTN_strongAttack">Strong\nAttack</string>
+    <string name="game_BTN_brutalAttack">Brutal\nAttack</string>
+    <string name="game_BTN_lightAttack_p1">game_BTN_lightAttack_p1</string>
+    <string name="game_BTN_StrongAttack_p1">game_BTN_StrongAttack_p1</string>
+    <string name="game_BTN_BrutalAttack_p1">game_BTN_BrutalAttack_p1</string>
+    <string name="game_BTN_lightAttack_p2">game_BTN_lightAttack_p2</string>
+    <string name="game_BTN_StrongAttack_p2">game_BTN_StrongAttack_p2</string>
+    <string name="game_BTN_BrutalAttack_p2">game_BTN_BrutalAttack_p2</string>
 
 </resources>
