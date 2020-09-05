@@ -12,5 +12,13 @@
     <string name="game_BTN_lightAttack_p2">game_BTN_lightAttack_p2</string>
     <string name="game_BTN_StrongAttack_p2">game_BTN_StrongAttack_p2</string>
     <string name="game_BTN_BrutalAttack_p2">game_BTN_BrutalAttack_p2</string>
-
+    <string name="main_BTN_roll">Roll</string>
+    <string name="p2_image_dice">p2_image_dice</string>
+    <string name="p1_image_dice">p1_image_dice</string>
+    <string name="resultScreen_background_image">resultScreen_background_image</string>
+    <string name="presentWinner_highScores">High Scores</string>
+    <string name="openScreen_BTN_startGame">Start game</string>
+    <string name="openScreen_background_image">openScreen background image</string>
+    <string name="openScreen_BTN_topScores">Top scores</string>
+    <string name="presentWinner_mainPage">Main Page</string>
 </resources>

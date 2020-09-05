@@ -13,13 +13,17 @@ hp bar - 200
  */
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+
+import java.util.Random;
 
 public class Activity_Game extends AppCompatActivity {
 
@@ -29,13 +33,24 @@ public class Activity_Game extends AppCompatActivity {
     private Button game_BTN_p1_brutalAttack;
     private ProgressBar game_PB_p1HP;
     private ImageView game_IMAGE_p1;
+    private ImageView game_IMAGE_p1_dice;
 
     //P2 widgets
     private Button game_BTN_p2_lightAttack;
     private Button game_BTN_p2_strongAttack;
     private Button game_BTN_p2_brutalAttack;
-    private ImageView game_IMAGE_p2;
     private ProgressBar game_PB_p2HP;
+    private ImageView game_IMAGE_p2;
+    private ImageView game_IMAGE_p2_dice;
+
+    private Button game_BTN_rollDices;
+
+    //Game variables
+    private boolean turn;
+    private boolean diceRollFinish = false;
+    private Handler handlerGame = new Handler();
+    private Handler handlerDices = new Handler();
+    private final int DELAY = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +60,17 @@ public class Activity_Game extends AppCompatActivity {
         loadImages();
 
         //p1 attack first
-        disableP2Buttons();
+        //disableP2Buttons();
+        disableAllButtons();
+
+        game_BTN_rollDices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handlerDices.postDelayed(runnableDice,DELAY);
+                game_BTN_rollDices.setEnabled(false);
+            }
+        });
+
 
         //P1 attack buttons
         game_BTN_p1_lightAttack.setOnClickListener(attackButtonsListener);
@@ -71,8 +96,8 @@ public class Activity_Game extends AppCompatActivity {
         private void attackButtonClicked(View view) {
             //P1 turn
             if (((String) view.getTag()).contains("p1")){
-                enableP2Buttons();
-                disableP1Buttons();
+                //enableP2Buttons();
+                //disableP1Buttons();
                 switch (((String) view.getTag())) {
                     case "game_BTN_lightAttack_p1":
                         hitP2(GameVariables.LIGHT_ATTACK);
@@ -87,8 +112,8 @@ public class Activity_Game extends AppCompatActivity {
             }
             //P2 turn
             else{
-                enableP1Buttons();
-                disableP2Buttons();
+                //enableP1Buttons();
+                //disableP2Buttons();
                 switch (((String) view.getTag())) {
                     case "game_BTN_lightAttack_p2":
                         hitP1(GameVariables.LIGHT_ATTACK);
@@ -100,6 +125,90 @@ public class Activity_Game extends AppCompatActivity {
                         hitP1(GameVariables.BRUTAL_ATTACK);
                         break;
                 }
+            }
+        }
+    };
+
+
+    Runnable runnableDice = new Runnable() {
+        final Random random = new Random();
+        final int[] dices = {0, 0, 0};
+
+        @Override
+        public void run() {
+            int number = random.nextInt(6) + 1;
+            int resource = getResources().getIdentifier("game_dice"+number,
+                    "drawable",
+                    "com.bawp.alienvspredator");
+            if (dices[2]%2 == 0){
+                dices[0] = resource;
+                game_IMAGE_p1_dice.setImageResource(dices[0]);
+            }
+            else{
+                dices[1] = resource;
+                game_IMAGE_p2_dice.setImageResource(dices[1]);
+            }
+            dices[2]++;
+            if (dices[0] == dices[1] || dices[1] == 0) {
+                if (dices[0] == dices[1]){
+                    dices[0] = 0;
+                    dices[1] = 0;
+                }
+                handlerDices.postDelayed(this, DELAY);
+            }
+            else{
+                turn = dices[0] > dices[1];
+                diceRollFinish = true;
+                handlerGame.postDelayed(runnableGame, DELAY);
+            }
+        }
+    };
+
+    Runnable runnableGame = new Runnable() {
+        final int[] count = {0};
+        final int delay = 1000;
+        final Random random = new Random();
+        @Override
+        public void run() {
+            int number = random.nextInt(3) + 1;
+            if(turn){
+                switch(number){
+                    case 1:
+                        game_BTN_p1_lightAttack.performClick();
+                        break;
+                    case 2:
+                        game_BTN_p1_strongAttack.performClick();
+                        break;
+                    case 3:
+                        game_BTN_p1_brutalAttack.performClick();
+                        break;
+                }
+                turn = false;
+            }
+            else{
+                switch(number){
+                    case 1:
+                        game_BTN_p2_lightAttack.performClick();
+                        break;
+                    case 2:
+                        game_BTN_p2_strongAttack.performClick();
+                        break;
+                    case 3:
+                        game_BTN_p2_brutalAttack.performClick();
+                        break;
+                }
+                turn = true;
+            }
+            count[0]++;
+            if(game_PB_p1HP.getProgress() < GameVariables.MAX_HP && game_PB_p2HP.getProgress() < GameVariables.MAX_HP){
+                handlerGame.postDelayed(this, delay);
+            }
+            else{
+                Intent intent = new Intent(Activity_Game.this, Activity_PresentWinner.class);
+                intent.putExtra(MySP.KEYS.WINNER, turn);
+                intent.putExtra(MySP.KEYS.ROUNDS, count);
+                startActivity(intent);
+                finish();
             }
         }
     };
@@ -140,12 +249,12 @@ public class Activity_Game extends AppCompatActivity {
     //load images from drawable using Glide
     private void loadImages() {
         Glide
-                .with(this)
+                .with(Activity_Game.this)
                 .load(R.drawable.game_alien_img)
                 .into(game_IMAGE_p1);
 
         Glide
-                .with(this)
+                .with(Activity_Game.this)
                 .load(R.drawable.game_predator_img)
                 .into(game_IMAGE_p2);
     }
@@ -190,8 +299,32 @@ public class Activity_Game extends AppCompatActivity {
         game_BTN_p2_brutalAttack = findViewById(R.id.game_BTN_p2_brutalAttack);
         game_PB_p2HP = findViewById(R.id.game_PB_p2HP);
 
+
+        game_BTN_rollDices = findViewById(R.id.game_BTN_rollDices);
+
         //images
         game_IMAGE_p1 = findViewById(R.id.game_IMAGE_p1);
         game_IMAGE_p2 = findViewById(R.id.game_IMAGE_p2);
+        game_IMAGE_p1_dice = findViewById(R.id.game_IMAGE_p1_dice);
+        game_IMAGE_p2_dice = findViewById(R.id.game_IMAGE_p2_dice);
+
+    }
+
+    //check if the roll of the dices part in the game finished before it start the game.
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (diceRollFinish){
+            handlerGame.postDelayed(runnableGame, DELAY);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (!diceRollFinish)
+            handlerDices.removeCallbacks(runnableDice);
+        else
+            handlerGame.removeCallbacks(runnableGame);
     }
 }

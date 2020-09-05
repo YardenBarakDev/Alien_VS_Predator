@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="5dp"
-                android:max="200"
+                android:max="100"
                 android:progressDrawable="@drawable/game_progressbar_high_hp"
 
                 />
@@ -89,12 +89,42 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="30">
 
-        </LinearLayout>
+
+            <ImageView
+                android:id="@+id/game_IMAGE_p1_dice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:contentDescription="@string/p1_image_dice" />
+
+            <ImageView
+                android:id="@+id/game_IMAGE_p2_dice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="@string/p2_image_dice" />
+
+            <Button
+                android:id="@+id/game_BTN_rollDices"
+                android:text="@string/main_BTN_roll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                style="@style/AppTheme.RoundedCornerMaterialButton"
+                />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -155,7 +185,7 @@
                 android:progressDrawable="@drawable/game_progressbar_high_hp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="5dp"
-                android:max="200"
+                android:max="100"
 
 
                 />
