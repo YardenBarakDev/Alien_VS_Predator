@@ -9,4 +9,10 @@ public class MyApp extends Application {
         super.onCreate();
 
     }
+
+    public static class Score {
+        private String name;
+        private int rounds;
+
+    }
 }

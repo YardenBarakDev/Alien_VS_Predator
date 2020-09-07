@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id="@+id/listView_Row_Image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_launcher_background"
+        android:contentDescription="@string/listView_rows_IMAGE" />
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/listView_Row_Image"
+        />
+</RelativeLayout>

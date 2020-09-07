@@ -36,12 +36,23 @@ public class MySP {
         return prefs.getString(key, def);
     }
 
+
     //***************Boolean*************************
     public void putBoolean(String key, Boolean value){
         prefs.edit().putBoolean(key, value).apply();
     }
-
     public Boolean getBoolean(String key, Boolean def){
         return prefs.getBoolean(key, def);
     }
+
+
+    //***************int*************************
+    public void putInt(String key, int value){
+        prefs.edit().putInt(key, value).apply();
+    }
+
+    public int getInt(String key, int def){
+        return prefs.getInt(key, def);
+    }
+
 }
