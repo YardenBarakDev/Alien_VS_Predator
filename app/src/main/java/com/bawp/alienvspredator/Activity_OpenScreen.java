@@ -53,4 +53,6 @@ public class Activity_OpenScreen extends AppCompatActivity {
         openScreen_BTN_topScores = findViewById(R.id.openScreen_BTN_topScores);
         openScreen_IMAGE_background = findViewById(R.id.openScreen_IMAGE_background);
     }
+
+
 }

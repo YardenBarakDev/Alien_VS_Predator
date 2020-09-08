@@ -58,7 +58,7 @@ public class Activity_Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         findViewByIdAll();
         loadImages();
-
+        
         //p1 attack first
         //disableP2Buttons();
         disableAllButtons();

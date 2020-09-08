@@ -4,15 +4,12 @@ import android.app.Application;
 
 public class MyApp extends Application {
 
+
     @Override
     public void onCreate() {
         super.onCreate();
 
+        MySP.initHelper(this);
     }
 
-    public static class Score {
-        private String name;
-        private int rounds;
-
-    }
 }
