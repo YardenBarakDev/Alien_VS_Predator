@@ -13,6 +13,15 @@
         android:scaleType="fitXY"
         android:contentDescription="@string/resultScreen_background_image" />
 
+    <TextView
+        android:id="@+id/presentWinner_LBL_winnerInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:typeface="monospace"
+        android:textSize="20sp"
+        android:textColor="@color/presentWinner_LBL_winnerDetails"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

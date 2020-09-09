@@ -71,7 +71,6 @@ public class Activity_Game extends AppCompatActivity {
             }
         });
 
-
         //P1 attack buttons
         game_BTN_p1_lightAttack.setOnClickListener(attackButtonsListener);
         game_BTN_p1_strongAttack.setOnClickListener(attackButtonsListener);
@@ -165,7 +164,7 @@ public class Activity_Game extends AppCompatActivity {
     };
 
     Runnable runnableGame = new Runnable() {
-        final int[] count = {0};
+        final int[] count = {1, 1};
         final int delay = 1000;
         final Random random = new Random();
         @Override
@@ -184,6 +183,7 @@ public class Activity_Game extends AppCompatActivity {
                         break;
                 }
                 turn = false;
+                count[0]++;
             }
             else{
                 switch(number){
@@ -197,21 +197,30 @@ public class Activity_Game extends AppCompatActivity {
                         game_BTN_p2_brutalAttack.performClick();
                         break;
                 }
+                count[1]++;
                 turn = true;
             }
-            count[0]++;
+
             if(game_PB_p1HP.getProgress() < GameVariables.MAX_HP && game_PB_p2HP.getProgress() < GameVariables.MAX_HP){
                 handlerGame.postDelayed(this, delay);
+
             }
             else{
-                Intent intent = new Intent(Activity_Game.this, Activity_PresentWinner.class);
-                intent.putExtra(MySP.KEYS.WINNER, turn);
-                intent.putExtra(MySP.KEYS.ROUNDS, count);
-                startActivity(intent);
-                finish();
+                if (turn)
+                saveDataAndChangeActivity(count[0]);
+                else
+                    saveDataAndChangeActivity(count[1]);
             }
         }
     };
+
+    private void saveDataAndChangeActivity(int count) {
+        Intent intent = new Intent(Activity_Game.this, Activity_PresentWinner.class);
+        intent.putExtra(MySP.KEYS.WINNER, !turn);
+        intent.putExtra(MySP.KEYS.ROUNDS, count);
+        startActivity(intent);
+        finish();
+    }
 
     private void announceWinner(String winner) {
         disableAllButtons();

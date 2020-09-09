@@ -58,9 +58,17 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        TopTen topTen = new TopTen();
+        topTen.getScoresFromSP();
+        for (int i = 0; i < topTen.getTopTenScores().size(); i++) {
+            LatLng pp = new LatLng(topTen.getTopTenScores().get(i).getLat(),
+                    topTen.getTopTenScores().get(i).getLon());
+            String title = (i+1) + "th place";
+            map.addMarker(new MarkerOptions().position(pp).title(title));
 
-        LatLng pp = new LatLng(-34,151);
-        map.addMarker(new MarkerOptions().position(pp).title("Sydney"));
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(pp, 8));
+        }
+        //LatLng pp = new LatLng(-34,151);
+       // map.addMarker(new MarkerOptions().position(pp).title("Sydney"));
+
     }
 }

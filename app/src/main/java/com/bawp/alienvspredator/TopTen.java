@@ -1,66 +1,42 @@
 package com.bawp.alienvspredator;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TopTen {
-    double lat;
-    double lon;
-    long timeStamp;
-    int numOfMoves;
-    boolean winner;
+
+    private ArrayList<Score> topTenScores;
+    private final int ARRAY_MAX_SIZE = 10;
 
     public TopTen() {
-
     }
 
-    public TopTen(double lat, double lon, long timeStamp, int numOfMoves, boolean winner) {
-        this.lat = lat;
-        this.lon = lon;
-        this.timeStamp = timeStamp;
-        this.numOfMoves = numOfMoves;
-        this.winner = winner;
+    public ArrayList<Score> getTopTenScores() {
+        return topTenScores;
     }
 
-    public double getLat() {
-        return lat;
-    }
-
-    public TopTen setLat(double lat) {
-        this.lat = lat;
+    public TopTen setTopTenScores(ArrayList<Score> topTenScores) {
+        this.topTenScores = topTenScores;
         return this;
     }
 
-    public double getLon() {
-        return lon;
+    public void getScoresFromSP(){
+        Gson gson = new Gson();
+        String json = MySP.getInstance().getString(MySP.KEYS.SCORE_ARRAY, null);
+        Type type = new TypeToken<List<Score>>() {}.getType();
+        topTenScores = gson.fromJson(json, type);
+
     }
 
-    public TopTen setLon(double lon) {
-        this.lon = lon;
-        return this;
+    public void saveScoresInSP(){
+        Gson gson = new Gson();
+        String json = gson.toJson(topTenScores);
+        MySP.getInstance().putString(MySP.KEYS.SCORE_ARRAY, json);
     }
-
-    public long getTimeStamp() {
-        return timeStamp;
-    }
-
-    public TopTen setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
-        return this;
-    }
-
-    public int getNumOfMoves() {
-        return numOfMoves;
-    }
-
-    public TopTen setNumOfMoves(int numOfMoves) {
-        this.numOfMoves = numOfMoves;
-        return this;
-    }
-
-    public boolean isWinner() {
-        return winner;
-    }
-
-    public TopTen setWinner(boolean winner) {
-        this.winner = winner;
-        return this;
+    public int getARRAY_MAX_SIZE() {
+        return ARRAY_MAX_SIZE;
     }
 }

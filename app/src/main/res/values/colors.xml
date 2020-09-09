@@ -10,4 +10,5 @@
     <color name="game_PB_hp">#65D800</color>
     <color name="game_PB_hpLost">#A80303</color>
     <color name="game_PB_hpCritical">#FF0000</color>
+    <color name="presentWinner_LBL_winnerDetails">#FFFFFF</color>
 </resources>

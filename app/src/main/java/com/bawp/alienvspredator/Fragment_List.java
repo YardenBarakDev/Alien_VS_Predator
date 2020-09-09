@@ -5,13 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.util.Objects;
 
 
 public class Fragment_List extends Fragment implements AdapterView.OnItemClickListener{
@@ -43,18 +41,18 @@ public class Fragment_List extends Fragment implements AdapterView.OnItemClickLi
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String[] a = {"1", "2","3", "4", "5"};
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()), android.R.layout.simple_list_item_1, a);
-        topScores_ListView.setAdapter(arrayAdapter);
-        topScores_ListView.setOnItemClickListener(this);
+
+        TopTen topTen = new TopTen();
+        topTen.getScoresFromSP();
+        AdapterForListView adapterForListView = new AdapterForListView(getActivity(), topTen.getTopTenScores());
+        topScores_ListView.setAdapter(adapterForListView);
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+
     }
-
-
 }
 

@@ -8,6 +8,9 @@ public class MySP {
     public interface KEYS{
         String WINNER = "WINNER";
         String ROUNDS = "ROUNDS";
+        String LATITUDE = "LATITUDE";
+        String LONGITUDE = "LONGITUDE";
+        String SCORE_ARRAY = "SCORE_ARRAY";
     }
 
     private static MySP instance;
@@ -54,5 +57,4 @@ public class MySP {
     public int getInt(String key, int def){
         return prefs.getInt(key, def);
     }
-
 }
