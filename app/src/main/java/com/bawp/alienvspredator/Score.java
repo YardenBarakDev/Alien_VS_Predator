@@ -2,7 +2,7 @@ package com.bawp.alienvspredator;
 
 import java.util.Date;
 
-public class Score {
+public class Score implements Comparable<Score>{
     private boolean winner;
     private int numOfMoves;
     private double lat;
@@ -64,5 +64,11 @@ public class Score {
     public Score setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
         return this;
+    }
+
+
+    @Override
+    public int compareTo(Score score) {
+        return Integer.compare(this.getNumOfMoves(), score.getNumOfMoves());
     }
 }

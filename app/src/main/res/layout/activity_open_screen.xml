@@ -17,7 +17,7 @@
     <Button
         android:id="@+id/openScreen_BTN_startGame"
         android:tag="openScreen_BTN_startGame"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:text="@string/openScreen_BTN_startGame"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -29,7 +29,7 @@
     <Button
         android:id="@+id/openScreen_BTN_topScores"
         android:tag="openScreen_BTN_topScores"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="@string/openScreen_BTN_topScores"

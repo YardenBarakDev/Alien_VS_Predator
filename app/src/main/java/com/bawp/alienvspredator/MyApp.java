@@ -9,6 +9,8 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         MySP.initHelper(this);
+        TopTen.initHelper();
+        TopTen.getInstance().getScoresFromSP();
     }
 
 }

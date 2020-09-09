@@ -10,25 +10,32 @@ public class TopTen {
 
     private ArrayList<Score> topTenScores;
     private final int ARRAY_MAX_SIZE = 10;
+    private static TopTen instance;
 
-    public TopTen() {
+    private TopTen(){
+        topTenScores = new ArrayList<>();
     }
 
+    public static TopTen initHelper(){
+        if (instance == null)
+            instance = new TopTen();
+        return instance;
+    }
+
+    public static TopTen getInstance(){
+        return instance;
+    }
     public ArrayList<Score> getTopTenScores() {
         return topTenScores;
-    }
-
-    public TopTen setTopTenScores(ArrayList<Score> topTenScores) {
-        this.topTenScores = topTenScores;
-        return this;
     }
 
     public void getScoresFromSP(){
         Gson gson = new Gson();
         String json = MySP.getInstance().getString(MySP.KEYS.SCORE_ARRAY, null);
-        Type type = new TypeToken<List<Score>>() {}.getType();
-        topTenScores = gson.fromJson(json, type);
-
+        if (json != null){
+            Type type = new TypeToken<List<Score>>() {}.getType();
+            topTenScores = gson.fromJson(json, type);
+        }
     }
 
     public void saveScoresInSP(){

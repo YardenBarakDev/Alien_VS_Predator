@@ -17,6 +17,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Fragment_Map extends Fragment implements OnMapReadyCallback {
 
+
+
+
+
+
+
     protected View view;
     private GoogleMap map;
     SupportMapFragment supportMapFragment;
@@ -27,6 +33,7 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
     public static Fragment_Map newInstance() {
         return new Fragment_Map();
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -58,11 +65,10 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        TopTen topTen = new TopTen();
-        topTen.getScoresFromSP();
-        for (int i = 0; i < topTen.getTopTenScores().size(); i++) {
-            LatLng pp = new LatLng(topTen.getTopTenScores().get(i).getLat(),
-                    topTen.getTopTenScores().get(i).getLon());
+
+        for (int i = 0; i <  TopTen.getInstance().getTopTenScores().size(); i++) {
+            LatLng pp = new LatLng( TopTen.getInstance().getTopTenScores().get(i).getLat(),
+                    TopTen.getInstance().getTopTenScores().get(i).getLon());
             String title = (i+1) + "th place";
             map.addMarker(new MarkerOptions().position(pp).title(title));
 

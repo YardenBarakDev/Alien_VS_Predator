@@ -52,9 +52,9 @@ public class AdapterForListView extends BaseAdapter {
             listView_textView_nameAndScore.setText(info);
             listView_textView_time.setText(score.getTimeStamp());
             if (score.getWinner())
-                listView_Row_Image.setImageResource(R.drawable.predator_icon_for_listview);
-            else
                 listView_Row_Image.setImageResource(R.drawable.alien_icon_for_listview);
+            else
+                listView_Row_Image.setImageResource(R.drawable.predator_icon_for_listview);
         }
         return view;
     }

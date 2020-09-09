@@ -57,29 +57,21 @@ public class Activity_PresentWinner extends AppCompatActivity {
     }
 
     private void checkAndSaveTopScores() {
-        TopTen topTen = new TopTen();
-        topTen.getScoresFromSP();
-        ArrayList<Score> tempArray =  topTen.getTopTenScores();
 
-        if (tempArray.size() < topTen.getARRAY_MAX_SIZE()){
-            tempArray.add(score);
-            topTen.setTopTenScores(tempArray);
-        }else {
-            Score tempScore = score;
-            for (int i = 0; i < topTen.getARRAY_MAX_SIZE(); i++) {
-                if (tempScore.getNumOfMoves() > tempArray.get(i).getNumOfMoves()){
-                    tempArray.set(i, score);
-                    tempScore = tempArray.get(i);
-                }
-            }
+        if (TopTen.getInstance().getTopTenScores().size() <  TopTen.getInstance().getARRAY_MAX_SIZE()){
+            TopTen.getInstance().getTopTenScores().add(score);
+            TopTen.getInstance().saveScoresInSP();
+
+        } else if(TopTen.getInstance().getTopTenScores().get(TopTen.getInstance().getARRAY_MAX_SIZE() -1).getNumOfMoves()
+                > score.getNumOfMoves()){
+            TopTen.getInstance().getTopTenScores().set(TopTen.getInstance().getARRAY_MAX_SIZE() -1, score);
+            TopTen.getInstance().saveScoresInSP();
         }
-        topTen.setTopTenScores(tempArray);
-        topTen.saveScoresInSP();
+
     }
 
     private void createScore() {
         String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
-        Log.d("datea", currentDateTimeString);
         score = new Score().setLat(latitude).
                 setLon(longitude).
                 setNumOfMoves(rounds).
