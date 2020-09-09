@@ -4,28 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Fragment_Map extends Fragment implements OnMapReadyCallback {
-
-
-
-
-
+public class Fragment_Map extends Fragment implements OnMapReadyCallback{
 
 
     protected View view;
     private GoogleMap map;
-    SupportMapFragment supportMapFragment;
     public Fragment_Map() {
         // Required empty public constructor
     }
@@ -41,6 +33,7 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
         if (view == null)
             view = inflater.inflate(R.layout.fragment_map, container, false);
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.TopScores_map_API);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
         return view;
     }
@@ -76,5 +69,9 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback {
         //LatLng pp = new LatLng(-34,151);
        // map.addMarker(new MarkerOptions().position(pp).title("Sydney"));
 
+    }
+
+    public GoogleMap getMap() {
+        return map;
     }
 }

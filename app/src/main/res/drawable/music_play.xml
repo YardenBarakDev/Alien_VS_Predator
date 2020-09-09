@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="25dp"
+    android:height="25dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+
+    <path
+        android:fillColor="@color/common_google_signin_btn_text_dark_pressed"
+        android:pathData="M256,512c-68.38,0-132.667-26.629-181.02-74.98C26.629,388.667,0,324.38,0,256 S26.629,123.333,74.98,74.98C123.333,26.629,187.62,0,256,0s132.667,26.629,181.02,74.98C485.371,123.333,512,187.62,512,256 s-26.629,132.667-74.98,181.02C388.667,485.371,324.38,512,256,512z M256,40C136.897,40,40,136.897,40,256s96.897,216,216,216 s216-96.897,216-216S375.103,40,256,40z M165,390.562V121.438L399.138,256L165,390.562z M205,190.562v130.877L318.862,256 L205,190.562z" />
+</vector>

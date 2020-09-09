@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,11 @@ public class Activity_OpenScreen extends AppCompatActivity {
     private Button openScreen_BTN_topScores;
     private ImageView openScreen_IMAGE_background;
 
+    private androidx.appcompat.widget.AppCompatImageButton openScreen_ImgBTN_stopMusic;
+    private androidx.appcompat.widget.AppCompatImageButton openScreen_ImgBTN_pauseMusic;
+    private androidx.appcompat.widget.AppCompatImageButton openScreen_ImgBTN_playMusic;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,9 @@ public class Activity_OpenScreen extends AppCompatActivity {
 
         openScreen_BTN_startGame.setOnClickListener(openScreenButtonListener);
         openScreen_BTN_topScores.setOnClickListener(openScreenButtonListener);
+        openScreen_ImgBTN_stopMusic.setOnClickListener(openScreenButtonListener);
+        openScreen_ImgBTN_pauseMusic.setOnClickListener(openScreenButtonListener);
+        openScreen_ImgBTN_playMusic.setOnClickListener(openScreenButtonListener);
     }
 
     private View.OnClickListener openScreenButtonListener = new View.OnClickListener() {
@@ -59,6 +68,15 @@ public class Activity_OpenScreen extends AppCompatActivity {
                 Intent intent2 = new Intent(Activity_OpenScreen.this, Activity_TopScores.class);
                 startActivity(intent2);
                 break;
+            case "openScreen_ImgBTN_stopMusic":
+                AppMusic.getInstance().stop();
+                break;
+            case "openScreen_ImgBTN_pauseMusic":
+                AppMusic.getInstance().pause();
+                break;
+            case "openScreen_ImgBTN_playMusic":
+                AppMusic.getInstance().play();
+                break;
         }
     }
         private void loadImages () {
@@ -72,6 +90,9 @@ public class Activity_OpenScreen extends AppCompatActivity {
             openScreen_BTN_startGame = findViewById(R.id.openScreen_BTN_startGame);
             openScreen_BTN_topScores = findViewById(R.id.openScreen_BTN_topScores);
             openScreen_IMAGE_background = findViewById(R.id.openScreen_IMAGE_background);
+            openScreen_ImgBTN_stopMusic = findViewById(R.id.openScreen_ImgBTN_stopMusic);
+            openScreen_ImgBTN_pauseMusic = findViewById(R.id.openScreen_ImgBTN_pauseMusic);
+            openScreen_ImgBTN_playMusic = findViewById(R.id.openScreen_ImgBTN_playMusic);
         }
 
 

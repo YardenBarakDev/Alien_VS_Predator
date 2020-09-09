@@ -7,6 +7,7 @@
     tools:context=".Activity_OpenScreen">
 
 
+
     <ImageView
         android:id="@+id/openScreen_IMAGE_background"
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/openScreen_BTN_topScores"
-        android:layout_marginBottom="5dp"
+        android:layout_margin="8dp"
         style="@style/AppTheme.RoundedCornerMaterialButton"
         />
 
@@ -34,8 +35,49 @@
         android:layout_centerHorizontal="true"
         android:text="@string/openScreen_BTN_topScores"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
+
+        android:layout_margin="8dp"
         style="@style/AppTheme.RoundedCornerMaterialButton"
         />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        >
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/openScreen_ImgBTN_stopMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/music_stop"
+            android:layout_margin="5dp"
+
+            android:tag="openScreen_ImgBTN_stopMusic"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/openScreen_ImgBTN_pauseMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/music_pause"
+            android:tag="openScreen_ImgBTN_pauseMusic"
+            android:layout_margin="5dp"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/openScreen_ImgBTN_playMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/music_play"
+            android:tag="openScreen_ImgBTN_playMusic"
+            android:layout_margin="5dp"
+
+            />
+
+
+    </LinearLayout>
 </RelativeLayout>
