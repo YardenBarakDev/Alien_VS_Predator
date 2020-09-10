@@ -6,6 +6,7 @@ p2-Predator
 ***************
 p1 always start first
 ***************
+turn = true => p1 turn
 attack1- light attack 10hp
 attack2- strong attack 20hp
 attack3- brutal attack 30hp
@@ -14,12 +15,15 @@ hp bar - 200
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
@@ -42,15 +46,16 @@ public class Activity_Game extends AppCompatActivity {
     private ProgressBar game_PB_p2HP;
     private ImageView game_IMAGE_p2;
     private ImageView game_IMAGE_p2_dice;
-
     private Button game_BTN_rollDices;
 
+    private TextView game_LBL_attackInfo;
     //Game variables
     private boolean turn;
     private boolean diceRollFinish = false;
     private Handler handlerGame = new Handler();
     private Handler handlerDices = new Handler();
     private final int DELAY = 1000;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,13 +133,14 @@ public class Activity_Game extends AppCompatActivity {
         }
     };
 
-
+    //make the dice animation
     Runnable runnableDice = new Runnable() {
         final Random random = new Random();
-        final int[] dices = {0, 0, 0};
+        final int[] dices = {0, 0, 0};// [0] ->p1, [1]->p2, [2]->who roll the dice
 
         @Override
         public void run() {
+            //get random number
             int number = random.nextInt(6) + 1;
             int resource = getResources().getIdentifier("game_dice"+number,
                     "drawable",
@@ -142,11 +148,19 @@ public class Activity_Game extends AppCompatActivity {
             if (dices[2]%2 == 0){
                 dices[0] = resource;
                 game_IMAGE_p1_dice.setImageResource(dices[0]);
+                //make dice roll sound
+                mediaPlayer =MediaPlayer.create(Activity_Game.this, R.raw.roll_dice);
+                mediaPlayer.start();
             }
             else{
                 dices[1] = resource;
                 game_IMAGE_p2_dice.setImageResource(dices[1]);
+                //make dice roll sound
+                mediaPlayer =MediaPlayer.create(Activity_Game.this, R.raw.roll_dice);
+                mediaPlayer.start();
             }
+            //if both dices have the same value or p2 haven't roll
+            //it will make sure the animation will continue
             dices[2]++;
             if (dices[0] == dices[1] || dices[1] == 0) {
                 if (dices[0] == dices[1]){
@@ -154,7 +168,13 @@ public class Activity_Game extends AppCompatActivity {
                     dices[1] = 0;
                 }
                 handlerDices.postDelayed(this, DELAY);
+
+                //make dice roll sound
+                mediaPlayer =MediaPlayer.create(Activity_Game.this, R.raw.roll_dice);
+                mediaPlayer.start();
             }
+            //it means the animation ended and one of the sides has a larger value in the dice
+            //according to this whoever won the dice roll will start first
             else{
                 turn = dices[0] > dices[1];
                 diceRollFinish = true;
@@ -163,12 +183,14 @@ public class Activity_Game extends AppCompatActivity {
         }
     };
 
+    //run the game it will stop only once of the sides lose
     Runnable runnableGame = new Runnable() {
         final int[] count = {1, 1};
         final int delay = 1000;
         final Random random = new Random();
         @Override
         public void run() {
+            //get random number between 1-3 that will choose the relevant attack cording to the number
             int number = random.nextInt(3) + 1;
             if(turn){
                 switch(number){
@@ -182,8 +204,12 @@ public class Activity_Game extends AppCompatActivity {
                         game_BTN_p1_brutalAttack.performClick();
                         break;
                 }
+                //change turn
                 turn = false;
+                //count how many attacks p1 did
                 count[0]++;
+                //make attack sound. each attack has a different sound
+                gameSound(number);
             }
             else{
                 switch(number){
@@ -197,12 +223,18 @@ public class Activity_Game extends AppCompatActivity {
                         game_BTN_p2_brutalAttack.performClick();
                         break;
                 }
-                count[1]++;
+                //change turn
                 turn = true;
+                //count how many attacks p2 did
+                count[1]++;
+                //make attack sound. each attack has a different sound
+                gameSound(number);
             }
-
+            // continue until the health bar is empty
             if(game_PB_p1HP.getProgress() < GameVariables.MAX_HP && game_PB_p2HP.getProgress() < GameVariables.MAX_HP){
                 handlerGame.postDelayed(this, delay);
+                //update the game_LBL_attackInfo
+                attackInfo(number, !turn);
 
             }
             else{
@@ -214,6 +246,7 @@ public class Activity_Game extends AppCompatActivity {
         }
     };
 
+    //move the result to Activity_PresentWinner
     private void saveDataAndChangeActivity(int count) {
         Intent intent = new Intent(Activity_Game.this, Activity_PresentWinner.class);
         intent.putExtra(MySP.KEYS.WINNER, !turn);
@@ -310,6 +343,7 @@ public class Activity_Game extends AppCompatActivity {
 
 
         game_BTN_rollDices = findViewById(R.id.game_BTN_rollDices);
+        game_LBL_attackInfo = findViewById(R.id.game_LBL_attackInfo);
 
         //images
         game_IMAGE_p1 = findViewById(R.id.game_IMAGE_p1);
@@ -319,6 +353,46 @@ public class Activity_Game extends AppCompatActivity {
 
     }
 
+    private void attackInfo(int attack, boolean player){
+        Log.d("aaaaa", "attackInfo: " + player);
+        String attacker;
+        if (player)
+            attacker = "Alien";
+        else
+            attacker = "Predator";
+
+        switch (attack){
+            case 1:
+                attacker = attacker + " Light attack";
+                game_LBL_attackInfo.setText(attacker);
+                break;
+            case 2:
+                attacker = attacker + " Strong attack";
+                game_LBL_attackInfo.setText(attacker);
+                break;
+            case 3:
+                attacker = attacker + " Brutal attack";
+                game_LBL_attackInfo.setText(attacker);
+                break;
+        }
+        mediaPlayer.start();
+    }
+
+    private void gameSound(int attack){
+        switch (attack){
+            case 1:
+                mediaPlayer = MediaPlayer.create(Activity_Game.this, R.raw.sound_lightattack);
+                break;
+            case 2:
+                mediaPlayer = MediaPlayer.create(Activity_Game.this, R.raw.sound_strongattack);
+                break;
+            case 3:
+                mediaPlayer = MediaPlayer.create(Activity_Game.this, R.raw.sound_brutalattack);
+                break;
+        }
+        mediaPlayer.start();
+    }
+
     //check if the roll of the dices part in the game finished before it start the game.
     @Override
     protected void onStart() {
@@ -326,6 +400,7 @@ public class Activity_Game extends AppCompatActivity {
         if (diceRollFinish){
             handlerGame.postDelayed(runnableGame, DELAY);
         }
+
     }
 
     @Override
@@ -335,5 +410,11 @@ public class Activity_Game extends AppCompatActivity {
             handlerDices.removeCallbacks(runnableDice);
         else
             handlerGame.removeCallbacks(runnableGame);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.release();
     }
 }

@@ -1,6 +1,5 @@
 package com.bawp.alienvspredator;
 
-import java.util.Date;
 
 public class Score implements Comparable<Score>{
     private boolean winner;

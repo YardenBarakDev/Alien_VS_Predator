@@ -48,17 +48,6 @@
         >
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/openScreen_ImgBTN_stopMusic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/music_stop"
-            android:layout_margin="5dp"
-
-            android:tag="openScreen_ImgBTN_stopMusic"
-            />
-
-
-        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/openScreen_ImgBTN_pauseMusic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

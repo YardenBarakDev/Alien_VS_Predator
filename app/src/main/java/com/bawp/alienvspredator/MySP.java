@@ -8,8 +8,6 @@ public class MySP {
     public interface KEYS{
         String WINNER = "WINNER";
         String ROUNDS = "ROUNDS";
-        String LATITUDE = "LATITUDE";
-        String LONGITUDE = "LONGITUDE";
         String SCORE_ARRAY = "SCORE_ARRAY";
     }
 

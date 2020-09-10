@@ -95,6 +95,16 @@
             android:layout_weight="30">
 
 
+
+            <TextView
+                android:id="@+id/game_LBL_attackInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/game_BTN_background"
+                />
             <ImageView
                 android:id="@+id/game_IMAGE_p1_dice"
                 android:layout_width="wrap_content"

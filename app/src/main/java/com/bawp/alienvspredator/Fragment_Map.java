@@ -58,7 +58,7 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback{
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-
+        //add all the location of the top ten players on the map
         for (int i = 0; i <  TopTen.getInstance().getTopTenScores().size(); i++) {
             LatLng pp = new LatLng( TopTen.getInstance().getTopTenScores().get(i).getLat(),
                     TopTen.getInstance().getTopTenScores().get(i).getLon());
@@ -66,9 +66,6 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback{
             map.addMarker(new MarkerOptions().position(pp).title(title));
 
         }
-        //LatLng pp = new LatLng(-34,151);
-       // map.addMarker(new MarkerOptions().position(pp).title("Sydney"));
-
     }
 
     public GoogleMap getMap() {

@@ -1,18 +1,11 @@
 package com.bawp.alienvspredator;
 
-import android.os.Bundle;
-import android.util.Log;
 
+import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class Activity_TopScores extends AppCompatActivity {
 
@@ -42,12 +35,14 @@ public class Activity_TopScores extends AppCompatActivity {
         transactionMap.commit();
     }
 
+
+    //this callback get the lan and lon from the ListView and make the map zoom in to the location
     CallBack_ListToMap callBack_listToMap = new CallBack_ListToMap() {
         @Override
         public void reachLocation(double lan, double lon) {
-            Log.d("yarden", "reachLocation: ");
             LatLng latLng = new LatLng(lan, lon);
             fragment_map.getMap().animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         }
     };
+
 }

@@ -9,8 +9,8 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         MySP.initHelper(this);
-        AppMusic.initHelper(this);
         TopTen.initHelper();
+        //fetch the top ten scores to ArrayList<Score> topTenScores;
         TopTen.getInstance().getScoresFromSP();
     }
 

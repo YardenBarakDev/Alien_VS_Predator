@@ -39,6 +39,7 @@ public class Fragment_List extends Fragment {
         }
 
         findViews();
+        //set listener
         topScores_ListView.setOnItemClickListener(onItemClickListener);
         return view;
     }

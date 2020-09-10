@@ -2,6 +2,7 @@ package com.bawp.alienvspredator;
 
 import java.util.Comparator;
 
+//sort ArrayList<Score> topTenScores by who has to lowest number of moves
 public class ScoreComparator implements Comparator<Score> {
 
     @Override

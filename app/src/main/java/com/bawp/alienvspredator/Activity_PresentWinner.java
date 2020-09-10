@@ -7,24 +7,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Activity_PresentWinner extends AppCompatActivity {
@@ -36,19 +28,21 @@ public class Activity_PresentWinner extends AppCompatActivity {
     private boolean winner;
     private Score score;
     private int rounds;
-    private LocationManager locationManager;
     private double longitude;
     private double latitude;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__presentwinner);
         findViewByIdAll();
-        getCurrentLocation();
-
         presentWinner_BTN_toHighScores.setOnClickListener(presentWinnerButtonListener);
         presentWinner_BTN_toMainPage.setOnClickListener(presentWinnerButtonListener);
+
+        getCurrentLocation();
+        playWinnerSound();
+
         getInfoFromDifferentActivity();
         loadWinnerImage();
         setWinnerText();
@@ -56,12 +50,28 @@ public class Activity_PresentWinner extends AppCompatActivity {
         checkAndSaveTopScores();
     }
 
+
+
+    //create a score
+    private void createScore() {
+        String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+        score = new Score().setLat(latitude).
+                setLon(longitude).
+                setNumOfMoves(rounds).
+                setTimeStamp(currentDateTimeString).
+                setWinner(winner);
+    }
+
+    //check if the score is good enough to be in the top ten array
     private void checkAndSaveTopScores() {
 
+        //if the array size is less then 10 just add the score
         if (TopTen.getInstance().getTopTenScores().size() <  TopTen.getInstance().getARRAY_MAX_SIZE()){
             TopTen.getInstance().getTopTenScores().add(score);
             TopTen.getInstance().saveScoresInSP();
 
+            //if the array size is 10 check if the last spot moves is grater then the current score
+            //if it's grater it replace them
         } else if(TopTen.getInstance().getTopTenScores().get(TopTen.getInstance().getARRAY_MAX_SIZE() -1).getNumOfMoves()
                 > score.getNumOfMoves()){
             TopTen.getInstance().getTopTenScores().set(TopTen.getInstance().getARRAY_MAX_SIZE() -1, score);
@@ -70,20 +80,9 @@ public class Activity_PresentWinner extends AppCompatActivity {
 
     }
 
-    private void createScore() {
-        String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
-        score = new Score().setLat(latitude).
-                setLon(longitude).
-                setNumOfMoves(rounds).
-                setTimeStamp(currentDateTimeString).
-                setWinner(winner);
-
-        Gson gson = new Gson();
-        String json = gson.toJson(score);
-    }
-
+    //check if all the permissions are granted and then fetch the location
     private void getCurrentLocation() {
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             new AlertDialog.Builder(Activity_PresentWinner.this).setMessage(R.string.openScreen_Rejected_permission).
@@ -95,13 +94,13 @@ public class Activity_PresentWinner extends AppCompatActivity {
                     }).create().show();
             finish();
         }
+        //get the location
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location != null){
             longitude = location.getLongitude();
             latitude = location.getLatitude();
-            String a = "lon " + location.getLongitude() + " lat" + location.getLongitude();
-            Log.d("yarden", a);
         }
+        //if the location is null the user will be alerted and the activity will close
         else{
             new AlertDialog.Builder(Activity_PresentWinner.this).setMessage("Unable to find location").
                     setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -125,6 +124,7 @@ public class Activity_PresentWinner extends AppCompatActivity {
     }
 
 
+    //buttons listener
     private View.OnClickListener presentWinnerButtonListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -145,6 +145,8 @@ public class Activity_PresentWinner extends AppCompatActivity {
 
         }
     };
+
+    // get the the winner details from Activity_Game
     private void getInfoFromDifferentActivity() {
         Intent intent = getIntent();
         winner = intent.getBooleanExtra(MySP.KEYS.WINNER, false);
@@ -152,7 +154,7 @@ public class Activity_PresentWinner extends AppCompatActivity {
     }
 
 
-
+    //load the background photo according to the winner
     private void loadWinnerImage() {
         if (winner){
             Glide
@@ -168,10 +170,22 @@ public class Activity_PresentWinner extends AppCompatActivity {
         }
 
     }
+
     private void findViewByIdAll(){
         resultScreen_IMAGE_background = findViewById(R.id.resultScreen_IMAGE_background);
         presentWinner_BTN_toHighScores = findViewById(R.id.presentWinner_BTN_toHighScores);
         presentWinner_BTN_toMainPage = findViewById(R.id.presentWinner_BTN_toMainPage);
         presentWinner_LBL_winnerInfo = findViewById(R.id.presentWinner_LBL_winnerInfo);
+    }
+
+    private void playWinnerSound() {
+        mediaPlayer = MediaPlayer.create(Activity_PresentWinner.this, R.raw.sound_winner);
+        mediaPlayer.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.release();
     }
 }
