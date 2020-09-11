@@ -183,9 +183,10 @@ public class Activity_PresentWinner extends AppCompatActivity {
         mediaPlayer.start();
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
         mediaPlayer.release();
     }
 }

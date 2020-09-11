@@ -148,17 +148,15 @@ public class Activity_Game extends AppCompatActivity {
             if (dices[2]%2 == 0){
                 dices[0] = resource;
                 game_IMAGE_p1_dice.setImageResource(dices[0]);
-                //make dice roll sound
-                mediaPlayer =MediaPlayer.create(Activity_Game.this, R.raw.roll_dice);
-                mediaPlayer.start();
             }
             else{
                 dices[1] = resource;
                 game_IMAGE_p2_dice.setImageResource(dices[1]);
-                //make dice roll sound
-                mediaPlayer =MediaPlayer.create(Activity_Game.this, R.raw.roll_dice);
-                mediaPlayer.start();
             }
+
+            //create dice roll sound
+            mediaPlayer =MediaPlayer.create(Activity_Game.this, R.raw.roll_dice);
+            mediaPlayer.start();
             //if both dices have the same value or p2 haven't roll
             //it will make sure the animation will continue
             dices[2]++;
@@ -168,10 +166,6 @@ public class Activity_Game extends AppCompatActivity {
                     dices[1] = 0;
                 }
                 handlerDices.postDelayed(this, DELAY);
-
-                //make dice roll sound
-                mediaPlayer =MediaPlayer.create(Activity_Game.this, R.raw.roll_dice);
-                mediaPlayer.start();
             }
             //it means the animation ended and one of the sides has a larger value in the dice
             //according to this whoever won the dice roll will start first
@@ -191,6 +185,7 @@ public class Activity_Game extends AppCompatActivity {
         @Override
         public void run() {
             //get random number between 1-3 that will choose the relevant attack cording to the number
+            //if turn == true -> p1 turn
             int number = random.nextInt(3) + 1;
             if(turn){
                 switch(number){
@@ -209,8 +204,8 @@ public class Activity_Game extends AppCompatActivity {
                 //count how many attacks p1 did
                 count[0]++;
                 //make attack sound. each attack has a different sound
-                gameSound(number);
             }
+            //p2 -> turn
             else{
                 switch(number){
                     case 1:
@@ -228,8 +223,8 @@ public class Activity_Game extends AppCompatActivity {
                 //count how many attacks p2 did
                 count[1]++;
                 //make attack sound. each attack has a different sound
-                gameSound(number);
             }
+            gameSound(number);
             // continue until the health bar is empty
             if(game_PB_p1HP.getProgress() < GameVariables.MAX_HP && game_PB_p2HP.getProgress() < GameVariables.MAX_HP){
                 handlerGame.postDelayed(this, delay);
@@ -315,18 +310,7 @@ public class Activity_Game extends AppCompatActivity {
         game_BTN_p2_brutalAttack.setEnabled(false);
     }
 
-    //enable p1 buttons
-    private void enableP1Buttons(){
-        game_BTN_p1_lightAttack.setEnabled(true);
-        game_BTN_p1_strongAttack.setEnabled(true);
-        game_BTN_p1_brutalAttack.setEnabled(true);
-    }
-    //enable p2 buttons
-    private void enableP2Buttons(){
-        game_BTN_p2_lightAttack.setEnabled(true);
-        game_BTN_p2_strongAttack.setEnabled(true);
-        game_BTN_p2_brutalAttack.setEnabled(true);
-    }
+
 
     private void findViewByIdAll() {
         //p1 widgets
@@ -353,6 +337,7 @@ public class Activity_Game extends AppCompatActivity {
 
     }
 
+    //change the game_LBL_attackInfo according to who is attacking and which attack
     private void attackInfo(int attack, boolean player){
         Log.d("aaaaa", "attackInfo: " + player);
         String attacker;
@@ -378,6 +363,7 @@ public class Activity_Game extends AppCompatActivity {
         mediaPlayer.start();
     }
 
+    //set the relevant mp3 file according to the attack and play it
     private void gameSound(int attack){
         switch (attack){
             case 1:
@@ -392,6 +378,25 @@ public class Activity_Game extends AppCompatActivity {
         }
         mediaPlayer.start();
     }
+        /*
+    used in V1
+
+    //enable p1 buttons
+    private void enableP1Buttons(){
+        game_BTN_p1_lightAttack.setEnabled(true);
+        game_BTN_p1_strongAttack.setEnabled(true);
+        game_BTN_p1_brutalAttack.setEnabled(true);
+    }
+    //enable p2 buttons
+    private void enableP2Buttons(){
+        game_BTN_p2_lightAttack.setEnabled(true);
+        game_BTN_p2_strongAttack.setEnabled(true);
+        game_BTN_p2_brutalAttack.setEnabled(true);
+    }
+
+
+     */
+
 
     //check if the roll of the dices part in the game finished before it start the game.
     @Override
