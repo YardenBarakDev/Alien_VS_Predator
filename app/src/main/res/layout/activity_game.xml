@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/game_background"
-    tools:context=".Activity_Game">
+    tools:context=".activites.Activity_Game">
 
 
     <LinearLayout
@@ -104,7 +104,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/game_BTN_background"
-                />
+                tools:ignore="RelativeOverlap" />
             <ImageView
                 android:id="@+id/game_IMAGE_p1_dice"
                 android:layout_width="wrap_content"
@@ -125,6 +125,7 @@
 
             <Button
                 android:id="@+id/game_BTN_rollDices"
+                android:tag="game_BTN_rollDices"
                 android:text="@string/main_BTN_roll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

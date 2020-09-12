@@ -1,4 +1,4 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.activites;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -16,6 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.bawp.alienvspredator.util.MySP;
+import com.bawp.alienvspredator.R;
+import com.bawp.alienvspredator.model.Score;
+import com.bawp.alienvspredator.model.TopTen;
 import com.bumptech.glide.Glide;
 import java.util.Date;
 

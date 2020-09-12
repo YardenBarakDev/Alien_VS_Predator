@@ -1,4 +1,4 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.activites;
 
 /*
 p1-Alien
@@ -25,6 +25,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bawp.alienvspredator.util.GameVariables;
+import com.bawp.alienvspredator.util.MySP;
+import com.bawp.alienvspredator.R;
 import com.bumptech.glide.Glide;
 
 import java.util.Random;
@@ -51,7 +55,7 @@ public class Activity_Game extends AppCompatActivity {
     private TextView game_LBL_attackInfo;
     //Game variables
     private boolean turn;
-    private boolean diceRollFinish = false;
+    private boolean diceRollFinish = false, diceRollStart = false;
     private Handler handlerGame = new Handler();
     private Handler handlerDices = new Handler();
     private final int DELAY = 1000;
@@ -63,19 +67,9 @@ public class Activity_Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         findViewByIdAll();
         loadImages();
-        
-        //p1 attack first
-        //disableP2Buttons();
         disableAllButtons();
 
-        game_BTN_rollDices.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handlerDices.postDelayed(runnableDice,DELAY);
-                game_BTN_rollDices.setEnabled(false);
-            }
-        });
-
+        game_BTN_rollDices.setOnClickListener(attackButtonsListener);
         //P1 attack buttons
         game_BTN_p1_lightAttack.setOnClickListener(attackButtonsListener);
         game_BTN_p1_strongAttack.setOnClickListener(attackButtonsListener);
@@ -99,36 +93,32 @@ public class Activity_Game extends AppCompatActivity {
          */
         private void attackButtonClicked(View view) {
             //P1 turn
-            if (((String) view.getTag()).contains("p1")){
-                //enableP2Buttons();
-                //disableP1Buttons();
-                switch (((String) view.getTag())) {
-                    case "game_BTN_lightAttack_p1":
-                        hitP2(GameVariables.LIGHT_ATTACK);
-                        break;
-                    case "game_BTN_StrongAttack_p1":
-                        hitP2(GameVariables.STRONG_ATTACK);
-                        break;
-                    case "game_BTN_BrutalAttack_p1":
-                        hitP2(GameVariables.BRUTAL_ATTACK);
-                        break;
-                }
-            }
-            //P2 turn
-            else{
-                //enableP1Buttons();
-                //disableP2Buttons();
-                switch (((String) view.getTag())) {
-                    case "game_BTN_lightAttack_p2":
-                        hitP1(GameVariables.LIGHT_ATTACK);
-                        break;
-                    case "game_BTN_StrongAttack_p2":
-                        hitP1(GameVariables.STRONG_ATTACK);
-                        break;
-                    case "game_BTN_BrutalAttack_p2":
-                        hitP1(GameVariables.BRUTAL_ATTACK);
-                        break;
-                }
+            switch (((String) view.getTag())) {
+                case "game_BTN_lightAttack_p1":
+                    hitP2(GameVariables.LIGHT_ATTACK);
+                    break;
+                case "game_BTN_StrongAttack_p1":
+                    hitP2(GameVariables.STRONG_ATTACK);
+                    break;
+                case "game_BTN_BrutalAttack_p1":
+                    hitP2(GameVariables.BRUTAL_ATTACK);
+                    break;
+
+                //p2 turn
+                case "game_BTN_lightAttack_p2":
+                    hitP1(GameVariables.LIGHT_ATTACK);
+                    break;
+                case "game_BTN_StrongAttack_p2":
+                    hitP1(GameVariables.STRONG_ATTACK);
+                    break;
+                case "game_BTN_BrutalAttack_p2":
+                    hitP1(GameVariables.BRUTAL_ATTACK);
+                    break;
+                case "game_BTN_rollDices":
+                    game_BTN_rollDices.setEnabled(false);
+                    diceRollStart = true;
+                    handlerDices.postDelayed(runnableDice,DELAY);
+                    break;
             }
         }
     };
@@ -179,7 +169,7 @@ public class Activity_Game extends AppCompatActivity {
 
     //run the game it will stop only once of the sides lose
     Runnable runnableGame = new Runnable() {
-        final int[] count = {1, 1};
+        final int[] count = {0, 0};
         final int delay = 1000;
         final Random random = new Random();
         @Override
@@ -203,7 +193,6 @@ public class Activity_Game extends AppCompatActivity {
                 turn = false;
                 //count how many attacks p1 did
                 count[0]++;
-                //make attack sound. each attack has a different sound
             }
             //p2 -> turn
             else{
@@ -233,10 +222,12 @@ public class Activity_Game extends AppCompatActivity {
 
             }
             else{
+                //p2 win
                 if (turn)
-                saveDataAndChangeActivity(count[0]);
+                saveDataAndChangeActivity(count[1]);
+                //p1 win
                 else
-                    saveDataAndChangeActivity(count[1]);
+                    saveDataAndChangeActivity(count[0]);
             }
         }
     };
@@ -378,7 +369,32 @@ public class Activity_Game extends AppCompatActivity {
         }
         mediaPlayer.start();
     }
-        /*
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //if the dice roll animation ended it will only start the attack animation
+        if (diceRollFinish)
+            handlerGame.postDelayed(runnableGame, DELAY);
+        //if the dice roll animation started and the dice roll animation haven't started
+        if(diceRollStart && !diceRollFinish){
+            handlerDices.postDelayed(runnableDice, DELAY);
+        }
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //if the dice roll animation haven't finished
+        if (!diceRollFinish)
+            handlerDices.removeCallbacks(runnableDice);
+        else
+            handlerGame.removeCallbacks(runnableGame);
+    }
+
+           /*
     used in V1
 
     //enable p1 buttons
@@ -394,32 +410,6 @@ public class Activity_Game extends AppCompatActivity {
         game_BTN_p2_brutalAttack.setEnabled(true);
     }
 
-
      */
 
-
-    //check if the roll of the dices part in the game finished before it start the game.
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (diceRollFinish){
-            handlerGame.postDelayed(runnableGame, DELAY);
-        }
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (!diceRollFinish)
-            handlerDices.removeCallbacks(runnableDice);
-        else
-            handlerGame.removeCallbacks(runnableGame);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mediaPlayer.release();
-    }
 }

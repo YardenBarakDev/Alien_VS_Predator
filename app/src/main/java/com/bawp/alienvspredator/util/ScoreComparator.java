@@ -1,4 +1,6 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.util;
+
+import com.bawp.alienvspredator.model.Score;
 
 import java.util.Comparator;
 

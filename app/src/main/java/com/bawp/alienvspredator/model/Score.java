@@ -1,4 +1,4 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.model;
 
 
 public class Score implements Comparable<Score>{

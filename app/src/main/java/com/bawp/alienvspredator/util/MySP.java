@@ -1,4 +1,4 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

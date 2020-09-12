@@ -1,9 +1,14 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.activites;
 
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.bawp.alienvspredator.interfaces.CallBack_ListToMap;
+import com.bawp.alienvspredator.fragments.Fragment_List;
+import com.bawp.alienvspredator.fragments.Fragment_Map;
+import com.bawp.alienvspredator.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_OpenScreen">
+    tools:context=".activites.Activity_OpenScreen">
 
 
 
@@ -15,30 +15,42 @@
         android:scaleType="fitXY"
         android:contentDescription="@string/openScreen_background_image" />
 
-    <Button
-        android:id="@+id/openScreen_BTN_startGame"
-        android:tag="openScreen_BTN_startGame"
-        android:layout_width="match_parent"
-        android:text="@string/openScreen_BTN_startGame"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/openScreen_BTN_topScores"
-        android:layout_margin="8dp"
-        style="@style/AppTheme.RoundedCornerMaterialButton"
-        />
-
-    <Button
-        android:id="@+id/openScreen_BTN_topScores"
-        android:tag="openScreen_BTN_topScores"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/openScreen_BTN_topScores"
+        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        >
 
-        android:layout_margin="8dp"
-        style="@style/AppTheme.RoundedCornerMaterialButton"
-        />
+        <Button
+            android:id="@+id/openScreen_BTN_topScores"
+            android:tag="openScreen_BTN_topScores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="@string/openScreen_BTN_topScores"
+            style="@style/AppTheme.RoundedCornerMaterialButton"
+            />
+
+        <Button
+            android:id="@+id/openScreen_BTN_startGame"
+            android:tag="openScreen_BTN_startGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:text="@string/openScreen_BTN_startGame"
+            style="@style/AppTheme.RoundedCornerMaterialButton"
+            />
+
+    </LinearLayout>
+
+
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

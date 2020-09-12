@@ -1,5 +1,6 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.model;
 
+import com.bawp.alienvspredator.util.MySP;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;

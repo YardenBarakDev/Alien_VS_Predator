@@ -1,6 +1,8 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.util;
 
 import android.app.Application;
+
+import com.bawp.alienvspredator.model.TopTen;
 
 public class MyApp extends Application {
 

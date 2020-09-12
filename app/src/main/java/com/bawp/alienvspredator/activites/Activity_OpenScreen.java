@@ -1,4 +1,4 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.activites;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import com.bawp.alienvspredator.R;
 import com.bumptech.glide.Glide;
 
 public class Activity_OpenScreen extends AppCompatActivity {
@@ -33,15 +34,16 @@ public class Activity_OpenScreen extends AppCompatActivity {
 
         findViewByIdAll();
         loadImages();
-        permissionsToRequest();
-        mediaPlayer = MediaPlayer.create(Activity_OpenScreen.this, R.raw.openscreen_song);
-        mediaPlayer.start();
-        mediaPlayer.setLooping(true);
+        //permissionsToRequest();
+        playBackgroundMusic();
+
         openScreen_BTN_startGame.setOnClickListener(openScreenButtonListener);
         openScreen_BTN_topScores.setOnClickListener(openScreenButtonListener);
         openScreen_ImgBTN_pauseMusic.setOnClickListener(openScreenButtonListener);
         openScreen_ImgBTN_playMusic.setOnClickListener(openScreenButtonListener);
     }
+
+
 
     private View.OnClickListener openScreenButtonListener = new View.OnClickListener() {
         @Override
@@ -57,8 +59,7 @@ public class Activity_OpenScreen extends AppCompatActivity {
     private void openScreenButtons(View view) {
         switch (((String) view.getTag())) {
             case "openScreen_BTN_startGame":
-                Intent intent = new Intent(Activity_OpenScreen.this, Activity_Game.class);
-                startActivity(intent);
+                permissionsToRequest();
                 break;
             case "openScreen_BTN_topScores":
                 Intent intent2 = new Intent(Activity_OpenScreen.this, Activity_TopScores.class);
@@ -102,13 +103,13 @@ public class Activity_OpenScreen extends AppCompatActivity {
         if (requestCode == 1) {
             if (grantResults.length > 0
                     && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                //if the user deny the permission request
                 messageDialog();
-                openScreen_BTN_startGame.setEnabled(false);
-
             }
             else{
-                openScreen_BTN_startGame.setEnabled(true);
-
+                //if the user approved the permission request
+                Intent intent = new Intent(Activity_OpenScreen.this, Activity_Game.class);
+                startActivity(intent);
             }
         }
     }
@@ -134,6 +135,12 @@ public class Activity_OpenScreen extends AppCompatActivity {
         openScreen_IMAGE_background = findViewById(R.id.openScreen_IMAGE_background);
         openScreen_ImgBTN_pauseMusic = findViewById(R.id.openScreen_ImgBTN_pauseMusic);
         openScreen_ImgBTN_playMusic = findViewById(R.id.openScreen_ImgBTN_playMusic);
+    }
+
+    private void playBackgroundMusic() {
+        mediaPlayer = MediaPlayer.create(Activity_OpenScreen.this, R.raw.openscreen_song);
+        mediaPlayer.start();
+        mediaPlayer.setLooping(true);
     }
 
     @Override

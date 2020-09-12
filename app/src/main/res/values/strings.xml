@@ -22,7 +22,7 @@
     <string name="openScreen_BTN_topScores">Top scores</string>
     <string name="presentWinner_mainPage">Main Page</string>
     <string name="listView_rows_IMAGE">winner Icon</string>
-    <string name="openScreen_Rejected_permission">These permission are mandatory please allow location services</string>
+    <string name="openScreen_Rejected_permission">These permission is mandatory please allow location services and enjoy the game</string>
     <string name="presentWinner_winner_predator">Predator win</string>
     <string name="presentWinner_winner_alien">Alien win</string>
 </resources>

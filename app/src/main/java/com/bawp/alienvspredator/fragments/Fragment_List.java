@@ -1,7 +1,6 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,14 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.bawp.alienvspredator.interfaces.CallBack_ListToMap;
+import com.bawp.alienvspredator.R;
+import com.bawp.alienvspredator.adapters.AdapterForListView;
+import com.bawp.alienvspredator.util.ScoreComparator;
+import com.bawp.alienvspredator.model.Score;
+import com.bawp.alienvspredator.model.TopTen;
+
 import java.util.Collections;
 
 public class Fragment_List extends Fragment {

@@ -1,4 +1,4 @@
-package com.bawp.alienvspredator;
+package com.bawp.alienvspredator.util;
 
 public class GameVariables {
     public static final int LIGHT_ATTACK = 10;
