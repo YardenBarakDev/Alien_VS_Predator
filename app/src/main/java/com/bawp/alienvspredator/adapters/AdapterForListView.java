@@ -48,7 +48,7 @@ public class AdapterForListView extends BaseAdapter {
         if (score.getNumOfMoves() != 1)
         {
             //find all widgets
-            TextView listView_textView_time_placeNumber = view.findViewById(R.id.listView_textView_time_placeNumber);
+            TextView listView_textView_placeNumber = view.findViewById(R.id.listView_textView_placeNumber);
             TextView listView_textView_nameAndScore = view.findViewById(R.id.listView_textView_nameAndScore);
             TextView listView_textView_time = view.findViewById(R.id.listView_textView_time);
             ImageView listView_Row_Image = view.findViewById(R.id.listView_Row_Image);
@@ -57,7 +57,7 @@ public class AdapterForListView extends BaseAdapter {
             String info = "Number of moves " + topTenScores.get(i).getNumOfMoves();
             String place = "(" + (i + 1) + "";
             listView_textView_nameAndScore.setText(info);
-            listView_textView_time_placeNumber.setText(place);
+            listView_textView_placeNumber.setText(place);
             listView_textView_time.setText(score.getTimeStamp());
 
             //true = p1
