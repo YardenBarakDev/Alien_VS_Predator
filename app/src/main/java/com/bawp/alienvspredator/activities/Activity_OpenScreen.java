@@ -1,4 +1,4 @@
-package com.bawp.alienvspredator.activites;
+package com.bawp.alienvspredator.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
